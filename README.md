@@ -7,6 +7,12 @@ A headless cookie consent management library for Next.js, built with the shadcn 
 
 ## Changelog
 
+### Version 0.1.3
+- Added PostHog integration example with ConsentGate pattern
+- Added documentation for integrating analytics providers
+- Added example component for safely using PostHog with consent check
+- Improved provider examples to demonstrate third-party service integration
+
 ### Version 0.1.2
 - Fixed external script error handling to prevent hanging promises
 - Improved error catching for inline scripts

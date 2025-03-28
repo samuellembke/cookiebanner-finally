@@ -1,6 +1,6 @@
 {
   "name": "cookiebanner-finally",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Headless cookie banner library for Next.js with shadcn philosophy",
   "license": "MIT",
   "author": "Yunicorn",
