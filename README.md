@@ -1,5 +1,8 @@
 # cookiebanner-finally
 
+[![npm version](https://img.shields.io/npm/v/cookiebanner-finally.svg)](https://www.npmjs.com/package/cookiebanner-finally)
+[![License](https://img.shields.io/npm/l/cookiebanner-finally.svg)](https://github.com/yunicorn/cookiebanner/blob/main/LICENSE)
+
 A headless cookie consent management library for Next.js, built with the shadcn philosophy.
 
 ## Features
