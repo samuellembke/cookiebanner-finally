@@ -296,6 +296,93 @@ export function Providers({ children }) {
 }
 ```
 
+### Integrating Analytics Providers (like PostHog)
+
+You can integrate analytics providers like PostHog while respecting user consent preferences using the ConsentGate component:
+
+```tsx
+// components/PostHogGateProvider.tsx
+'use client'
+
+import React from 'react';
+import { ConsentGate, ConsentCategory } from 'cookiebanner-finally';
+import { PostHogProvider } from '@posthog/nextjs/react';
+
+export function PostHogGateProvider({ 
+  children, 
+  apiKey = 'YOUR_API_KEY',
+  apiHost = 'https://app.posthog.com'
+}) {
+  return (
+    <ConsentGate 
+      category={ConsentCategory.Analytics}
+      fallback={<>{children}</>}  // Just render children without PostHog
+    >
+      {/* Only rendered when analytics consent is given */}
+      <PostHogProvider
+        apiKey={apiKey}
+        options={{
+          api_host: apiHost,
+        }}
+      >
+        {children}
+      </PostHogProvider>
+    </ConsentGate>
+  );
+}
+```
+
+Then in your providers.tsx:
+
+```tsx
+// app/providers.tsx
+'use client'
+
+import { ConsentProvider } from 'cookiebanner-finally';
+import { PostHogGateProvider } from '../components/PostHogGateProvider';
+
+export function Providers({ children }) {
+  return (
+    <ConsentProvider>
+      <PostHogGateProvider>
+        {children}
+      </PostHogGateProvider>
+    </ConsentProvider>
+  );
+}
+```
+
+When using PostHog in client components:
+
+```tsx
+'use client'
+
+import { usePostHog } from 'posthog-js/react';
+import { useCookiePreferences, ConsentCategory } from 'cookiebanner-finally';
+
+export function AnalyticsAwareButton() {
+  const { preferences } = useCookiePreferences();
+  const posthog = usePostHog();
+  
+  const handleClick = () => {
+    // Safe to use - if PostHog isn't available (no consent),
+    // we check before usage
+    if (preferences.analytics && posthog) {
+      posthog.capture('button_clicked');
+    }
+    
+    // Always execute this part regardless of consent
+    console.log('Button clicked');
+  };
+  
+  return (
+    <button onClick={handleClick}>
+      Track Event
+    </button>
+  );
+}
+```
+
 ### Creating a Custom Consent Gate Hook
 
 ```tsx

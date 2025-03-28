@@ -3,6 +3,7 @@
 import React from 'react';
 import { CookieSettings } from './CookieSettings';
 import { YouTubeEmbed } from './YouTubeEmbed';
+import { PostHogAnalyticsExample } from './PostHogAnalyticsExample';
 
 export default function Home() {
   return (
@@ -12,6 +13,15 @@ export default function Home() {
       <section className="mb-10">
         <h2 className="text-2xl font-semibold mb-4">Cookie Settings</h2>
         <CookieSettings />
+      </section>
+      
+      <section className="mb-10">
+        <h2 className="text-2xl font-semibold mb-4">Analytics Integration</h2>
+        <p className="mb-4">
+          This example shows how to integrate PostHog analytics with the cookie banner.
+          Analytics will only be initialized when the user has given consent.
+        </p>
+        <PostHogAnalyticsExample />
       </section>
       
       <section className="mb-10">

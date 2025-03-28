@@ -3,6 +3,7 @@
 import React from 'react';
 import { ConsentProvider } from '../../'; // For testing locally (in a real project it would be from 'cookiebanner-finally')
 import { ConsentCategory } from '../../src/types';
+import { PostHogGateProvider } from './PostHogGateProvider';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -17,7 +18,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
       }}
       autoShowBanner={true}
     >
-      {children}
+      <PostHogGateProvider
+        apiKey="YOUR_API_KEY"
+        apiHost="https://app.posthog.com"
+      >
+        {children}
+      </PostHogGateProvider>
     </ConsentProvider>
   );
 }
