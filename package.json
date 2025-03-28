@@ -1,0 +1,72 @@
+{
+  "name": "cookiebanner-finally",
+  "version": "0.1.0",
+  "description": "Headless cookie banner library for Next.js with shadcn philosophy",
+  "license": "MIT",
+  "author": "Yunicorn",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yunicorn/cookiebanner"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "keywords": [
+    "nextjs",
+    "cookies",
+    "consent",
+    "gdpr",
+    "cookiebanner",
+    "headless",
+    "react",
+    "hooks"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "prepublishOnly": "bun run build"
+  },
+  "peerDependencies": {
+    "next": ">=13.4.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "dependencies": {
+    "js-cookie": "^3.0.5"
+  },
+  "devDependencies": {
+    "@tanstack/config": "^0.18.0",
+    "@types/bun": "latest",
+    "@types/js-cookie": "^3.0.6",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "eslint": "^8.0.0",
+    "next": "^15.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "tsup": "^8.4.0",
+    "typescript": "^5.0.0"
+  }
+}

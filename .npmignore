@@ -1,0 +1,30 @@
+# Development files
+.git/
+.gitignore
+node_modules/
+*.log
+.DS_Store
+
+# Source and test files
+src/
+tests/
+examples/
+.github/
+
+# Build configuration
+tsconfig.json
+.eslintrc.js
+.prettierrc
+*.config.js
+
+# Editor configurations
+.vscode/
+.idea/
+
+# Temporary files
+*.swp
+*.swo
+*.tmp
+
+# Bun lock file
+bun.lock
