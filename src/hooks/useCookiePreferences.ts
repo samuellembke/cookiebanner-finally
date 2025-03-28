@@ -83,13 +83,9 @@ export interface UseCookiePreferencesResult {
  */
 export function useCookiePreferences(): UseCookiePreferencesResult {
   const { preferences, updatePreferences, hasConsentFor } = useConsentContext();
-  const [isLoading, setIsLoading] = useState(true);
-  const [preferencesState, setPreferencesState] = useState<ConsentPreferences>(preferences);
-
-  useEffect(() => {
-    setPreferencesState(preferences);
-    setIsLoading(false);
-  }, [preferences]);
+  // Since ConsentProvider already handles the initial loading state,
+  // we only need to track if we've received valid preferences from the context
+  const isLoading = !preferences || Object.keys(preferences).length === 0;
 
   // Update a single category
   const updateCategory = (category: ConsentCategory, enabled: boolean) => {
@@ -102,7 +98,7 @@ export function useCookiePreferences(): UseCookiePreferencesResult {
   };
 
   return {
-    preferences: preferencesState,
+    preferences,
     isLoading,
     isEnabled,
     updatePreferences,

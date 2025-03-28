@@ -75,14 +75,15 @@ export const ConsentProvider: React.FC<ConsentProviderProps> = ({
 
   // Initialize on mount (client-side only)
   useEffect(() => {
-    if (initialPreferences) {
+    const hasGivenConsent = manager.hasConsentBeenGiven();
+    
+    // Only apply initialPreferences if user hasn't given consent yet
+    if (initialPreferences && !hasGivenConsent) {
       manager.saveConsentPreferences(initialPreferences);
     }
     
     const currentPreferences = manager.getConsentPreferences();
     setPreferences(currentPreferences);
-    
-    const hasGivenConsent = manager.hasConsentBeenGiven();
     setIsConsentGiven(hasGivenConsent);
     
     // Show banner if consent not given and autoShowBanner is true

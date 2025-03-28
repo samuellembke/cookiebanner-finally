@@ -58,32 +58,40 @@ export const ConsentGate: React.FC<ConsentGateProps> = ({
   return fallback ? (
     <>{fallback}</>
   ) : (
-    <div 
-      className="consent-gate-fallback"
-      style={{
-        padding: '1rem',
-        border: '1px solid #ccc',
-        borderRadius: '0.25rem',
-        backgroundColor: '#f8f9fa',
-        margin: '0.5rem 0',
-      }}
-    >
+    <div className="cookie-consent-gate-fallback">
       <p>This content requires consent for {category} cookies.</p>
       {showPromptOnClick && (
         <button
           onClick={showConsentPrompt}
-          style={{
-            padding: '0.5rem 1rem',
-            backgroundColor: '#0070f3',
-            color: 'white',
-            border: 'none',
-            borderRadius: '0.25rem',
-            cursor: 'pointer',
-          }}
+          className="cookie-consent-gate-button"
         >
           Manage Cookie Preferences
         </button>
       )}
+      {/* 
+        CSS classes to be defined in consumer application:
+        
+        .cookie-consent-gate-fallback {
+          padding: 1rem;
+          border: 1px solid #ccc;
+          border-radius: 0.25rem;
+          background-color: #f8f9fa;
+          margin: 0.5rem 0;
+        }
+        
+        .cookie-consent-gate-button {
+          padding: 0.5rem 1rem;
+          background-color: #0070f3;
+          color: white;
+          border: none;
+          border-radius: 0.25rem;
+          cursor: pointer;
+        }
+
+        .cookie-consent-gate-button:hover {
+          background-color: #0051a8;
+        }
+      */}
     </div>
   );
 };

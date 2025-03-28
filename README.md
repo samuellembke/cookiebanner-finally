@@ -5,6 +5,15 @@
 
 A headless cookie consent management library for Next.js, built with the shadcn philosophy.
 
+## Changelog
+
+### Version 0.1.2
+- Fixed external script error handling to prevent hanging promises
+- Improved error catching for inline scripts
+- Fixed ConsentProvider to respect existing user consent when initialPreferences are provided
+- Simplified loading state in useCookiePreferences hook
+- Replaced inline styles with CSS classes in ConsentGate component for better styling flexibility
+
 ## Features
 
 - 🔄 **Headless architecture**: Provides the logic while you control the UI

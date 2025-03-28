@@ -125,8 +125,15 @@ export class ScriptManager {
       });
     }
     
-    // Set callback
+    // Set success callback
     scriptElement.onload = callback;
+    
+    // Set error handling
+    scriptElement.onerror = (error) => {
+      console.error(`Failed to load script: ${script.id}`, error);
+      // Still call callback to resolve the promise, but log the error
+      callback();
+    };
     
     // Add to document
     document.head.appendChild(scriptElement);
@@ -150,8 +157,12 @@ export class ScriptManager {
       });
     }
     
-    // Add to document
-    document.head.appendChild(scriptElement);
+    try {
+      // Add to document
+      document.head.appendChild(scriptElement);
+    } catch (error) {
+      console.error(`Error executing inline script: ${script.id}`, error);
+    }
   }
 }
 
