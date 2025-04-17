@@ -89,7 +89,7 @@ export function useCookiePreferences(): UseCookiePreferencesResult {
 
   // Update a single category
   const updateCategory = (category: ConsentCategory, enabled: boolean) => {
-    updatePreferences({ [category]: enabled });
+    updatePreferences({ [category]: enabled }, false);
   };
 
   // Check if a category is enabled

@@ -16,7 +16,7 @@ interface ConsentContextType {
   // Consent management methods
   acceptAll: () => void;
   denyAll: () => void;
-  updatePreferences: (preferences: Partial<ConsentPreferences>) => void;
+  updatePreferences: (preferences: Partial<ConsentPreferences>, closeOnUpdate?: boolean) => void;
   closeBanner: () => void;
   resetBanner: () => void;
   hasConsentFor: (category: ConsentCategory) => boolean;
@@ -110,12 +110,15 @@ export const ConsentProvider: React.FC<ConsentProviderProps> = ({
     // Update state
   };
 
-  const updatePreferences = (newPreferences: Partial<ConsentPreferences>) => {
+  const updatePreferences = (newPreferences: Partial<ConsentPreferences>, closeOnUpdate: boolean = false) => {
     const updated = manager.saveConsentPreferences(newPreferences);
     setPreferences(updated);
     setIsConsentGiven(true);
-    setShowBanner(false);
-    // Update state
+    
+    // Only close the banner if explicitly requested
+    if (closeOnUpdate) {
+      setShowBanner(false);
+    }
   };
 
   const closeBanner = () => {

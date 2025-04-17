@@ -52,6 +52,7 @@ export function useCookieBanner(): UseCookieBannerResult {
     resetBanner,
   } = useConsentContext();
 
+  // Update methods to ensure they close the banner
   return {
     isVisible: showBanner,
     isConsentGiven,
