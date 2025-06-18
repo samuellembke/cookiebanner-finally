@@ -263,7 +263,14 @@ import { ConsentGate, ConsentCategory } from 'cookiebanner-finally';
 
 export function YouTubeEmbed({ videoId }: { videoId: string }) {
   return (
-    <ConsentGate category={ConsentCategory.Marketing}>
+    <ConsentGate 
+      category={ConsentCategory.Marketing}
+      messages={{
+        consentRequired: 'This YouTube video requires consent for {category} cookies to load.',
+        managePreferences: 'Allow YouTube Videos',
+        loading: 'Loading video...'
+      }}
+    >
       <iframe
         width="560"
         height="315"
@@ -276,6 +283,33 @@ export function YouTubeEmbed({ videoId }: { videoId: string }) {
   );
 }
 ```
+
+#### Custom Messages
+
+The `ConsentGate` component supports customizable messages for better user experience:
+
+```tsx
+<ConsentGate 
+  category={ConsentCategory.Analytics}
+  messages={{
+    consentRequired: 'This content requires consent for {category} cookies.',
+    managePreferences: 'Manage Cookie Settings',
+    loading: 'Loading content...'
+  }}
+>
+  {/* Your protected content */}
+</ConsentGate>
+```
+
+**Message Options:**
+- `consentRequired`: Message shown when consent is needed. Use `{category}` as a placeholder for the consent category.
+- `managePreferences`: Button text for opening consent preferences.
+- `loading`: Loading message displayed while checking consent status.
+
+**Default Messages:**
+- `consentRequired`: "This content requires consent for {category} cookies."
+- `managePreferences`: "Manage Cookie Preferences"
+- `loading`: "Loading..."
 
 ## Advanced Usage
 

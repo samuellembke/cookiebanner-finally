@@ -19,19 +19,11 @@ export function YouTubeEmbed({
   return (
     <ConsentGate 
       category={ConsentCategory.Marketing}
-      loading={<div>Loading...</div>}
-      fallback={
-        <div className="flex flex-col items-center justify-center p-6 bg-gray-100 rounded border border-gray-300" style={{ width, height }}>
-          <p className="text-gray-700 mb-4 text-center">
-            This content requires marketing cookies consent.
-          </p>
-          <button
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-          >
-            Manage Cookie Settings
-          </button>
-        </div>
-      }
+      messages={{
+        consentRequired: 'This YouTube video requires consent for {category} cookies to load.',
+        managePreferences: 'Allow YouTube Videos',
+        loading: 'Loading video...'
+      }}
     >
       <iframe
         width={width}

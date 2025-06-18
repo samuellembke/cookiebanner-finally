@@ -3,7 +3,7 @@
 import React from 'react';
 import type { ReactNode } from 'react';
 import { useConsentGate } from '../hooks/useConsentGate';
-import { ConsentCategory } from '../types';
+import { ConsentCategory, ConsentGateMessages, DEFAULT_CONSENT_GATE_MESSAGES } from '../types';
 
 export interface ConsentGateProps {
   /**
@@ -30,6 +30,11 @@ export interface ConsentGateProps {
    * Whether to show the consent banner when clicked
    */
   showPromptOnClick?: boolean;
+  
+  /**
+   * Custom messages for the consent gate
+   */
+  messages?: ConsentGateMessages;
 }
 
 /**
@@ -41,12 +46,16 @@ export const ConsentGate: React.FC<ConsentGateProps> = ({
   fallback,
   loading,
   showPromptOnClick = true,
+  messages = {},
 }) => {
   const { hasConsent, isLoading, showConsentPrompt } = useConsentGate(category);
   
+  // Merge custom messages with defaults
+  const finalMessages = { ...DEFAULT_CONSENT_GATE_MESSAGES, ...messages };
+  
   // Show loading state
   if (isLoading) {
-    return loading ? <>{loading}</> : <div>Loading...</div>;
+    return loading ? <>{loading}</> : <div>{finalMessages.loading}</div>;
   }
   
   // Show content if consent is given
@@ -59,13 +68,13 @@ export const ConsentGate: React.FC<ConsentGateProps> = ({
     <>{fallback}</>
   ) : (
     <div className="cookie-consent-gate-fallback">
-      <p>This content requires consent for {category} cookies.</p>
+      <p>{finalMessages.consentRequired?.replace('{category}', category)}</p>
       {showPromptOnClick && (
         <button
           onClick={showConsentPrompt}
           className="cookie-consent-gate-button"
         >
-          Manage Cookie Preferences
+          {finalMessages.managePreferences}
         </button>
       )}
       {/* 

@@ -30,6 +30,36 @@ export const DEFAULT_CONSENT_PREFERENCES: ConsentPreferences = {
 };
 
 /**
+ * Custom messages for consent gate
+ */
+export interface ConsentGateMessages {
+  /**
+   * Message shown when content requires consent
+   * Can include {category} placeholder for the consent category
+   */
+  consentRequired?: string;
+  
+  /**
+   * Button text for managing preferences
+   */
+  managePreferences?: string;
+  
+  /**
+   * Loading message
+   */
+  loading?: string;
+}
+
+/**
+ * Default messages for consent gate
+ */
+export const DEFAULT_CONSENT_GATE_MESSAGES: ConsentGateMessages = {
+  consentRequired: 'This content requires consent for {category} cookies.',
+  managePreferences: 'Manage Cookie Preferences',
+  loading: 'Loading...'
+};
+
+/**
  * Script definition
  */
 export interface Script {
